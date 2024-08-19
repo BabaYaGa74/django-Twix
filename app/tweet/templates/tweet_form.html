@@ -1,10 +1,6 @@
-
 {% extends "layout.html" %}
 
-{% block title%}
-    New django app
-{% endblock %}
-
+{%load form_tags %}
 
 {% block content%}
 <div class="container mt-5">
@@ -23,10 +19,10 @@
                         {% csrf_token %}
                         <div class="form-group mb-3">
                             <label for="{{ form.text.id_for_label }}">{{ form.text.label }}</label>
-                            {{ form.text }}
+                            {{ form.text|add_class:"form-control form-control-lg rounded-3"}}
                         </div>
                         <div class="form-group mb-3">
-                            {{ form.photo }}
+                            {{ form.photo|add_class:"form-control" }}
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-warning btn-block" type="submit">Submit</button>
@@ -41,4 +37,3 @@
     </div>
 </div>
 {% endblock %}
-
