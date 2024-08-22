@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
 # Create your views here.
-def index(request):
-    return render(request, 'index.html')
+# def index(request):
+#     return render(request, 'index.html')
 
 def tweet_list(request):
     tweets = Tweet.objects.all().order_by('-created_at')
@@ -67,3 +67,12 @@ def register(request):
         form = UserRegistration()
     
     return render(request, 'registration/register.html', {'form': form})
+
+def search_result(request):
+    query = request.GET.get('search_text')
+    if query:
+        results = Tweet.objects.filter(text__icontains=query)
+    else:
+        results = Tweet.objects.none()
+
+    return render(request, 'search_result.html',{'results':results})
